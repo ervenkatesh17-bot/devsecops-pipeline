@@ -18,21 +18,16 @@ jobs:
       - name: Install Dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt
+          pip install flask bandit safety flake8
 
-      - name: 🔍 Step 1: Code Quality Check (Flake8)
+      - name: Step 1 - Code Quality Check (Flake8)
         run: |
-          # Fails if code is messy
           flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
 
-      - name: 🛡️ Step 2: Security Scan (Bandit)
+      - name: Step 2 - Security Scan (Bandit)
         run: |
-          # Scans for security issues (like hardcoded passwords)
-          # -r means recursive, -ll means medium/high severity
-          bandit -r . -ll || true 
-          # "|| true" is used so pipeline doesn't stop, just reports issues
+          bandit -r . -ll || true
 
-      - name: 📦 Step 3: Dependency Check (Safety)
+      - name: Step 3 - Dependency Check (Safety)
         run: |
-          # Checks if any installed library has known vulnerabilities
           safety check || true
