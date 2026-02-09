@@ -14,5 +14,4 @@ Instead of waiting for a security audit *after* deployment, this pipeline uses *
 
 Here is the automated logic that runs on every `git push`:
 
-```mermaid
 Code Commit ➔  Linting (Flake8) ➔  SAST Scan (Bandit) ➔ Dependency Check (Safety) ➔ Build/Deploy
